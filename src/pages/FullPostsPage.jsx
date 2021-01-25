@@ -13,7 +13,6 @@ function FullPostPage() {
 
   React.useEffect(() => {
     const apiUrl = `https://5c3755177820ff0014d92711.mockapi.io/posts${inputedValue}`;
-    console.log(apiUrl);
     axios.get(apiUrl).then((resp) => {
       const allData = resp.data;
       setUsers(allData);
