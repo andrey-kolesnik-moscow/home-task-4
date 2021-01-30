@@ -1,4 +1,5 @@
 import Card from 'react-bootstrap/Card';
+import { Link } from 'react-router-dom';
 
 function OneCard({ user }) {
   return (
@@ -6,9 +7,7 @@ function OneCard({ user }) {
       <Card.Img variant="top" src={user.image} />
       <Card.Body>
         <h5>
-          <a href={`/post/${user.id}`} className="">
-            {user.title}
-          </a>
+          <Link to={{ pathname: `/post/${user.id}` }}>{user.title}</Link>
         </h5>
         <Card.Text>{user.text}</Card.Text>
       </Card.Body>

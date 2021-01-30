@@ -5,10 +5,12 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Loader from '../components/Loader.jsx';
 
+import { Link } from 'react-router-dom';
+
 function PostPage(props) {
   const [user, setUser] = React.useState({});
   const [isLoading, setIsLoading] = React.useState(true);
-  const [commentsObj, setCommentsObj] = React.useState({});
+  const [comments, setComments] = React.useState([]);
 
   React.useEffect(() => {
     try {
@@ -26,20 +28,24 @@ function PostPage(props) {
       const apiCommentsUrl = `https://5c3755177820ff0014d92711.mockapi.io/posts/${props.match.params.number}/comments`;
       axios.get(apiCommentsUrl).then((resp) => {
         const data = resp.data;
-        setCommentsObj(data[0]);
+        setComments(data);
       });
     } catch {
       console.log('Comments data downloading has failed!');
     }
   }, [props.match.params.number]);
 
+  React.useEffect(() => {
+    console.log(comments);
+  }, [comments]);
+
   return (
     <div className="container">
       <br />
       <br />
-      <a href="/" className="">
+      <Link to={{ pathname: '/' }}>
         <Button variant="primary">Назад</Button>
-      </a>
+      </Link>
       {isLoading ? (
         <Loader />
       ) : (
@@ -48,9 +54,7 @@ function PostPage(props) {
             <Card.Img variant="top" src={user.image} />
             <Card.Body>
               <h5>
-                <a href={`${window.location.pathname}`} className="">
-                  {user.title}
-                </a>
+                <Link to={{ pathname: `${window.location.pathname}` }}>{user.title}</Link>
               </h5>
               <Card.Text>{user.text}</Card.Text>
             </Card.Body>
@@ -60,12 +64,13 @@ function PostPage(props) {
         </div>
       )}
       <Card className="mb-4">
-        <Card.Body>
-          <Card.Subtitle className="mb-2 text-muted">
-            {commentsObj ? commentsObj.name : "Comments are still loading or don't exist ("}
-          </Card.Subtitle>
-          {commentsObj ? commentsObj.text : "Comments are still loading or don't exist ("}
-        </Card.Body>
+        {comments &&
+          comments.map((item) => (
+            <Card.Body key={item.id}>
+              <Card.Subtitle className="mb-2 text-muted">{item.name}</Card.Subtitle>
+              {item.text}
+            </Card.Body>
+          ))}
       </Card>
     </div>
   );

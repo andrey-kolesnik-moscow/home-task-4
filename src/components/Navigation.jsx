@@ -5,8 +5,19 @@ import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 
+import { NavLink } from 'react-router-dom';
+
 function Navigation(props) {
   const [input, setInput] = React.useState('');
+
+  function onClick() {
+    if (props.setInputedValue) {
+      props.setInputedValue('?title=' + input);
+      setInput('');
+    } else {
+      alert('Sorry guys, please, change the request form.');
+    }
+  }
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
@@ -14,8 +25,12 @@ function Navigation(props) {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="/">Главная</Nav.Link>
-          <Nav.Link href="/about">Обо мне</Nav.Link>
+          <NavLink to={{ pathname: '/' }} activeClassName="nav-link">
+            Главная
+          </NavLink>
+          <NavLink to={{ pathname: '/about' }} className="nav-link">
+            Обо мне
+          </NavLink>
         </Nav>
         <Form
           onSubmit={(e) => {
@@ -31,16 +46,7 @@ function Navigation(props) {
               setInput(e.target.value);
             }}
           />
-          <Button
-            onClick={() => {
-              if (props.setInputedValue) {
-                props.setInputedValue('?title=' + input);
-                setInput('');
-              } else {
-                alert('Sorry guys, please, change the request form.');
-              }
-            }}
-            variant="primary">
+          <Button onClick={() => onClick()} variant="primary">
             Найти
           </Button>
         </Form>
