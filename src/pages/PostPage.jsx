@@ -35,10 +35,6 @@ function PostPage(props) {
     }
   }, [props.match.params.number]);
 
-  React.useEffect(() => {
-    console.log(comments);
-  }, [comments]);
-
   return (
     <div className="container">
       <br />
