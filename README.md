@@ -1,70 +1,26 @@
-# Getting Started with Create React App
+!!! Описания задачи, данное на курсе React от Denis, было мной частично модифицировано и сокращено с целью экономии Вашего времени на прочтение.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Необходимо реализовать простую версию блога с возможностью перехода по нескольким страницам.
 
-## Available Scripts
+JSON со списком всех статей, комментариев и конкретной записи можно получить по ссылкам:
 
-In the project directory, you can run:
+1. `(https://.../posts)` - список всех статей.
+2. `(https://.../posts/1)` - получить объект конкретной статьи по ID.
+3. `(https://.../posts/1/comments)` - получить список комментариев из записи с **ID = 1**.
 
-### `yarn start`
+Что нужно использовать? Вот несколько советов:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. React Bootstrap. Советую заглянуть в раздел Cards, Jumbotron и Navbar, чтобы реализовать вёрстку.
+2. Для того, чтобы определять нахождение на конкретной странице странице можно использовать window.location.pathname.
+3. Лучше юзать axios вместо fetch.
+4. При загрузке данных с сервера необходимо показать статус загруки текстом или любым другим способом.
+5. При загрузке конкретной статьи необходимо загружать данные этой статьи с бэкенда.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Доп. задание.
+Реализовать поиск статей при с помощью axios, а не просто фильтровать массив с помощью .filter.
 
-### `yarn test`
+Структура проекта.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. `HomePage.jsx` - должен рендерить только список новостей и ничего другого.
+2. `FullPostPage.jsx` - рендерит полную статью и комментарии по этой статье.
+3. `AboutPage.jsx` - рендерит информацию о блоге.
